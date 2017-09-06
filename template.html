@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Flat UI Free</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/picmap.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="https://parse.com/downloads/javascript/parse-1.2.13.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false" style=""></script>
+    <script src="appjs/geo.js"></script>
+    <script src="appjs/jquery.exif.js"></script>
+    <script src="appjs/moment-with-langs.min.js"></script>
+    <script src="appjs/moment-timezone.min.js"></script>
+    
+    
+  </head>
+  <body>
+    <div class="container">
+
+
+           <div class='row'>
+             <div class='col-xs-12'>
+               Pictures from <span id='calendarlabel'>October 21, 2013</span> <span id='calendar' class="fui-calendar"></span><input type="text" id="calendarval" style='display: none;'>
+             
+               <script>
+               $(function() {
+                 $("#calendarval").datepicker({
+                     onSelect: function () {
+                         $("#calendarval").text($(this).val());
+                         $("#calendarlabel").html($(this).val());
+                     }
+                 });
+                 $('#calendarval').datepicker( "setDate", "10/21/2013" );
+
+                 $("#calendar").click(function () {
+                     $("#calendarval").datepicker("show");
+                 });
+               
+               });
+               </script>
+             </div>
+           </div>
+           <div class='row'>
+             <div class='col-xs-12'>
+             <div id="images">
+             </div>                        
+             </div>
+          </div>
+           <div class='row'>
+             <div class='col-xs-6'>
+               <div id="map-canvas"></div>              
+             </div>
+             <div id="image-browser" class='col-xs-6'></div>                   
+           </div>
+           <div  class='row'>
+             <div class='col-xs-6'>
+               <div id='pano' height='400' width='400'></div>
+             </div>
+           </div>
+    </div>
+    <!-- /.container -->
+
+        <script src='appjs/peekpong.js'></script>
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+  </body>
+</html>

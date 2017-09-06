@@ -1,0 +1,189 @@
+<html><head><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}</style><style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}</style><link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"><style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style><style type="text/css">.gm-style div,.gm-style span,.gm-style label,.gm-style a{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400}.gm-style div,.gm-style span,.gm-style label{text-decoration:none}.gm-style img{border:0;padding:0;margin:0}</style>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false" style=""></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/geo.js"></script>
+    <script src="js/jquery.exif.js"></script>
+    <script type="text/vbscript">
+Function IEBinary_getByteAt(strBinary, iOffset)
+	IEBinary_getByteAt = AscB(MidB(strBinary,iOffset+1,1))
+End Function
+Function IEBinary_getLength(strBinary)
+	IEBinary_getLength = LenB(strBinary)
+End Function
+</script>
+
+    
+   <div id="start">start</div>
+    <div id="images">
+    <img src="images/photo-15.JPG" id="img1" exif="true" width="200">
+    <img src="images/photo-16.JPG" id="img2" exif="true" width="200">
+    <img src="images/photo-17.JPG" id="img3" exif="true" width="200">
+    <img src="images/photo-18.JPG" id="img4" exif="true" width="200">
+    </div>
+    
+    <script>
+
+    $("#start").click(function() {
+      var center = null;
+      $("#images").children('img').each(function(i) {
+        var exif = $(this).exifAll()[0];
+        var lat = convertDegToDec(exif.GPSLatitude);
+        var lng = convertDegToDec(exif.GPSLongitude);
+
+        $(this).click(function() {
+          var myLatlng = new google.maps.LatLng(lat, lng);
+          console.log(myLatlng);
+          map.panTo(myLatlng);
+          map.setZoom(18);    
+          // map.setZoom(9);
+          // map.setCenter();
+        });
+        center = ['pic', lat, lng, i]; 
+        images.push(center);
+
+        // google.maps.event.addListener(marker,'click',function(e) {
+        //                 map.setZoom(9);
+        //                 map.setCenter(e.latLng);
+        //             });    
+      });
+      var mapOptions = {
+        zoom: 10,
+        center: new google.maps.LatLng(center[1], center[2])
+      }
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+                                    mapOptions);
+
+      setMarkers(map, images);
+      
+    });
+    
+    // $("#img1").click(function() {
+    //   var exif = $(this).exifAll()[0];
+    // 
+    // });
+    
+    // $("#img1").click(function() {
+      
+      // var center = null;
+      // $("#images").children('img').each(function(i) {
+      //   var exif = $(this).exifAll()[0];
+      //   var lat = convertDegToDec(exif.GPSLatitude);
+      //   var lng = convertDegToDec(exif.GPSLongitude);
+      //   center = ['pic', lat, lng, i]; 
+      //   images.push(center);
+      //   
+      // });
+      
+    // alert("Taken with a " + $(this).exif("Make") + " " + $(this).exif("Model") + " on " + $(this).exif("DateTimeOriginal"));
+    // exif(strTagName) returns a string with value for the tag [strTagName]
+//     console.log(this);
+//     console.log($(this).exifAll());
+//     var exif = $(this).exifAll()[0];
+// console.log(exif.GPSLatitude);
+//     var lat = convertDegToDec(exif.GPSLatitude);
+//     var lng = convertDegToDec(exif.GPSLongitude);
+//     console.log(lat);
+//     console.log(lng);
+//     var center = ['pic', lat, lng, 1]; 
+//     images.push(center);
+    // var mapOptions = {
+    //   zoom: 10,
+    //   center: new google.maps.LatLng(center[1], center[2])
+    // }
+    // map = new google.maps.Map(document.getElementById('map-canvas'),
+    //                               mapOptions);
+    // 
+    // setMarkers(map, images);
+    
+    // });
+// The following example creates complex markers to indicate beaches near
+// Sydney, NSW, Australia. Note that the anchor is set to
+// (0,32) to correspond to the base of the flagpole.
+
+var map = null;
+
+function initialize() {
+  // console.log($("#img1"));
+  // console.log('wtf');
+}
+
+var images = [];
+/**
+ * Data for the markers consisting of a name, a LatLng and a zIndex for
+ * the order in which these markers should display on top of each
+ * other.
+ */
+var beaches = [
+  ['Bondi Beach', -33.890542, 151.274856, 4],
+  ['Coogee Beach', -33.923036, 151.259052, 5],
+  ['Cronulla Beach', -34.028249, 151.157507, 3],
+  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+  ['Maroubra Beach', -33.950198, 151.259302, 1]
+];
+
+function setMarkers(map, locations) {
+  // Add markers to the map
+
+  // Marker sizes are expressed as a Size of X,Y
+  // where the origin of the image (0,0) is located
+  // in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker
+  // increase in the X direction to the right and in
+  // the Y direction down.
+  var image = {
+    url: 'images/beachflag.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+  for (var i = 0; i < locations.length; i++) {
+    var beach = locations[i];
+    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: beach[0],
+        zIndex: beach[3]
+    });
+    
+    google.maps.event.addListener(marker, 'click', function(ev) {
+      console.log(ev.latLng.ob );
+      $("#image-browser").html(ev.latLng.ob);
+      });
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  
+  
+    <div id="map-canvas" ></div>
+    <div id="image-browser"></div>
+  
+</body></html>

@@ -1,0 +1,21 @@
+.logo a{
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/logo.png', sizingmethod='crop');
+	background:url(none.gif);
+	cursor:pointer;
+}
+.bubble {
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bubble.png', sizingmethod='crop');
+	background:url(none.gif);
+}
+.about {
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/about.png', sizingmethod='crop');
+	background:url(none.gif);
+}
+.portfolio {
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/portfolio.png', sizingmethod='crop');
+	background:url(none.gif);
+}
+.contact {
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/contact.png', sizingmethod='crop');
+	background:url(none.gif);
+}
